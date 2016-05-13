@@ -1,0 +1,29 @@
+{
+  "name": "ecrm/ecrm-php-client",
+  "description": "EnhancedCRM PHP API client",
+  "homepage": "http://www.nfq.com/",
+  "keywords": [
+    "enhanced crm",
+    "http",
+    "api"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "homepage": "http://www.nfq.com",
+      "name": "Enhanced CRM"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EnhancedCRM\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0"
+  },
+  "type": "library"
+}
