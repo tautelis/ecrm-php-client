@@ -92,7 +92,7 @@ class Configuration
         if (strlen($this->accessToken) != 64)
         {
             $msg = 'Provided access token is invalid '
-                . 'as it contains disallowed characters. '
+                . 'as it does not match the required length. '
                 . 'Please double-check your access token.';
             throw new Exception\ConfigurationError($msg);
         }

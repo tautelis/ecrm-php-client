@@ -14,28 +14,22 @@ class Leads
     /**
      * @var array
      */
-    protected static $validFields = [
-        'address',
-        'custom_fields',
-        'description',
-        'email',
-        'facebook',
-        'fax',
-        'first_name',
-        'industry',
-        'last_name',
-        'linkedin',
-        'mobile',
-        'organization_name',
-        'owner_id',
-        'phone',
-        'skype',
-        'source_id',
-        'status',
-        'tags',
-        'title',
-        'twitter',
-        'website'
+    protected static $validStructure = [
+        'title' => true,
+        'description' => true,
+        'price' => true,
+        'contacts' => [[
+            'firstName' => true,
+            'lastName' => true,
+            'companyName' => true,
+            'phones' => [[
+                'phone' => true
+            ]],
+            'emails' => [[
+                'email' => true
+            ]],
+        ]],
+        'metas' => [],
     ];
 
     /**
@@ -62,10 +56,30 @@ class Leads
      */
     public function create(array $lead)
     {
-        $attributes = array_intersect_key($lead, array_flip(self::$validFields));
+        $this->validateArray($lead, self::$validStructure);
+        $attributes = [ 'lead' => $lead ];
 
-        if (isset($attributes['meta']) && empty($attributes['meta'])) unset($attributes['meta']);
+        return $this->http->post("/leads", $attributes, ['raw' => true])->getResource();
+    }
 
-        return $this->http->post("/leads", $attributes)->getResource();
+    /**
+     * @param array $input
+     * @param array $structure
+     *
+     * @return bool
+     */
+    protected function validateArray(&$input, $structure)
+    {
+        foreach ($input as $key => &$value) {
+            if (is_array($value)) {
+                $this->validateArray($value, $structure[$key]);
+            }
+        }
+
+        foreach ($input as $key => $item) {
+            if (!isset($structure[$key])) {
+                unset($input[$key]);
+            }
+        }
     }
 }

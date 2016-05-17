@@ -146,7 +146,7 @@ class Http
         curl_setopt($curl, CURLOPT_URL, $absUrl);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $rawHeaders);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, strtoupper($method));
         if ($body && in_array($method, ['post', 'put', 'patch']))
         {
             $envelope = $raw ? $body : $this->wrapEnvelope($body);
