@@ -284,7 +284,7 @@ class Http
             $msg = "Unknown error occurred. The response should be a json response. "
                 . "HTTP response code={$code}. "
                 . "HTTP response body={$rawResponse}.";
-            throw new \Exception($msg);
+            throw new Exception\ResponseError($msg);
         }
 
         if ($code < 200 || $code >= 400)
@@ -314,7 +314,7 @@ class Http
                 $msg = "Unknown HTTP error response. "
                     . "HTTP response code={$code}. "
                     . "HTTP response body={$rawResponse}.";
-                throw new \Exception($msg);
+                throw new Exception\ConnectionError($code, $msg);
         }
     }
 }

@@ -8,7 +8,6 @@ namespace EnhancedCRM;
 class Configuration
 {
     const VERSION = "1";
-    const PRODUCTION_URL = "https://api.getbase.com";
     const URL_REGEXP = "/\b(?:(?:https?|http):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
 
     /**
@@ -50,12 +49,12 @@ class Configuration
      */
     public function __construct(array $options = [])
     {
-        if (empty($options['accessToken'])) {
+        if (empty($options['accessToken'] || empty($options['baseUrl'])) {
             throw new Exception\ConfigurationError($this->_accessTokenIsMissing());
         }
 
         $this->accessToken = $options['accessToken'];
-        $this->baseUrl = isset($options['baseUrl']) ? $options['baseUrl'] : Configuration::PRODUCTION_URL;
+        $this->baseUrl = $options['baseUrl'];
         $this->userAgent = isset($options['userAgent']) ? $options['userAgent'] : "EnhancedCRM/v2 PHP/" . self::VERSION;
         $this->timeout = isset($options['timeout']) ? $options['timeout'] : 30;
         $this->verifySSL = isset($options['verifySSL']) ? $options['verifySSL'] : true;
