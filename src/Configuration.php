@@ -49,7 +49,7 @@ class Configuration
      */
     public function __construct(array $options = [])
     {
-        if (empty($options['accessToken'] || empty($options['baseUrl'])) {
+        if (empty($options['accessToken']) || empty($options['baseUrl'])) {
             throw new Exception\ConfigurationError($this->_accessTokenIsMissing());
         }
 
