@@ -2,9 +2,7 @@
 
 namespace EnhancedCRM\Exception;
 
-use Exception;
-
-class ConnectionError extends Exception
+class ConnectionError extends BaseError
 {
     /**
      * @var string

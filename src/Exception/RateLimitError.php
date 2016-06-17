@@ -2,9 +2,7 @@
 
 namespace EnhancedCRM\Exception;
 
-use Exception;
-
-class RateLimitError extends Exception
+class RateLimitError extends BaseError
 {
   public function __construct()
   {

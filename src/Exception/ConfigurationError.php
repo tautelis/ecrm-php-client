@@ -2,12 +2,10 @@
 
 namespace EnhancedCRM\Exception;
 
-use Exception;
-
 /**
  * ConfigurationError class.
  */
-class ConfigurationError extends Exception
+class ConfigurationError extends BaseError
 {
     /**
      * ConfigurationError constructor.
