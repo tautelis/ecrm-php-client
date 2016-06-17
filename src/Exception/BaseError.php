@@ -25,22 +25,24 @@ class BaseError extends Exception
      * BaseError constructor.
      *
      * @param string $httpStatusCode
-     * @param int    $response
+     * @param array  $response
      */
-    public function __construct($httpStatusCode, $response)
+    public function __construct($message = '', $httpStatusCode = 0, $response = [])
     {
-        $this->httpStatusCode = $httpStatusCode;
-        $this->errors = array_map(function($data){ return $data['error'];  }, $response['errors']);
+        if (!empty($response)) {
+            $this->httpStatusCode = $httpStatusCode;
+            $this->errors = array_map(function($data){ return $data['error'];  }, $response['errors']);
 
-        $this->meta = $response['meta'];
+            $this->meta = $response['meta'];
 
-        $extractError = function($error) {
-            return "resource=" . @$error['resource'] . " field=" . @$error['field'] . " code=" . $error['code'] . " message=" . $error['message'];
-        };
+            $extractError = function($error) {
+                return "resource=" . @$error['resource'] . " field=" . @$error['field'] . " code=" . $error['code'] . " message=" . $error['message'];
+            };
 
-        $msg = implode("\n", array_map($extractError, $this->errors));
+            $message = implode("\n", array_map($extractError, $this->errors));
+        }
 
-        parent::__construct($msg);
+        parent::__construct($message);
     }
 
     /**

@@ -17,8 +17,8 @@ class ConnectionError extends BaseError
     /**
      * ConnectionError constructor.
      *
-     * @param string $errno
-     * @param int $error_message
+     * @param int    $errno
+     * @param string $error_message
      */
     public function __construct($errno, $error_message)
     {
