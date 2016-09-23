@@ -172,6 +172,18 @@ class Leads
     }
 
     /**
+     * @param string $email
+     *
+     * @return $this
+     */
+    public function addEmail($email)
+    {
+        $this->lead['contacts'][0]['emails'][] = ['email' => $email];
+
+        return $this;
+    }
+
+    /**
      * @param string $phone
      *
      * @return $this
@@ -179,6 +191,18 @@ class Leads
     public function setPhone($phone)
     {
         $this->lead['contacts'][0]['phones'][0] = ['phone' => $phone];
+
+        return $this;
+    }
+
+    /**
+     * @param string $phone
+     *
+     * @return $this
+     */
+    public function addPhone($phone)
+    {
+        $this->lead['contacts'][0]['phones'][] = ['phone' => $phone];
 
         return $this;
     }
