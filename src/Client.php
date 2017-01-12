@@ -3,6 +3,7 @@
 namespace EnhancedCRM;
 
 use EnhancedCRM\Resource\Leads;
+use EnhancedCRM\Resource\Offers;
 
 /**
  * eCRM client that makes managing the resource easy.
@@ -53,5 +54,6 @@ class Client
 
         // Resources
         $this->leads = new Leads($this->http);
+        $this->offers = new Offers($this->http);
     }
 }
