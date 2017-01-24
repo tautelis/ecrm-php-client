@@ -63,4 +63,21 @@ class Offers
             ['raw' => true]
         )->getResource();
     }
+
+    /**
+     * Send notification about opened offer
+     *
+     * @param $offerId
+     * @return resource
+     */
+    public function notifyOpen($offerId)
+    {
+        return $this->http->request(
+            'POST',
+            "/offers/open/{$offerId}",
+            null,
+            null,
+            ['raw' => true]
+        )->getResource();
+    }
 }
