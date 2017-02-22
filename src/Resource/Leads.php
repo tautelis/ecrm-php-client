@@ -35,7 +35,10 @@ class Leads
         'sourceUrl' => true,
         'orderId' => true,
         'orderStatus' => true,
-        'metas' => [],
+        'metas' => [[
+            'key' => true,
+            'value' => true,
+        ]],
     ];
 
     /**
@@ -317,6 +320,9 @@ class Leads
     protected function validateArray(&$input, $structure)
     {
         foreach ($input as $key => &$value) {
+            if (is_integer($key) && !isset($structure[$key]) && isset($structure[0])) {
+                $structure[$key] = $structure[0];
+            }
             if (is_array($value)) {
                 $this->validateArray($value, $structure[$key]);
             }
