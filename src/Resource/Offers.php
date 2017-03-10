@@ -40,43 +40,29 @@ class Offers
      * Load order by uuid
      *
      * @param string $hash
+     *
      * @return mixed
      */
     public function load($hash)
     {
-        return $this->http->request('GET', "/offer/{$hash}", null, null, ['raw' => true])->getResource();
+        return $this->http->request('GET', "/offers/{$hash}", null, null, ['raw' => true])->getResource();
     }
 
     /**
      * Notify crm about a completed offer order
      *
-     * @param array $data
+     * @param string $hash
+     * @param array  $data
+     *
      * @return resource
      */
-    public function notifyComplete(array $data)
+    public function notifyComplete($hash, array $data)
     {
         return $this->http->request(
             'POST',
-            "/offers/complete/{$data['offerId']}",
+            "/offers/{$hash}/complete",
             null,
             $data,
-            ['raw' => true]
-        )->getResource();
-    }
-
-    /**
-     * Send notification about opened offer
-     *
-     * @param $offerId
-     * @return resource
-     */
-    public function notifyOpen($offerId)
-    {
-        return $this->http->request(
-            'POST',
-            "/offers/open/{$offerId}",
-            null,
-            null,
             ['raw' => true]
         )->getResource();
     }
