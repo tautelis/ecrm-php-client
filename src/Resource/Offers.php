@@ -39,13 +39,13 @@ class Offers
     /**
      * Load order by uuid
      *
-     * @param string $hash
+     * @param string $uuid
      *
      * @return mixed
      */
-    public function load($hash)
+    public function load($uuid)
     {
-        return $this->http->request('GET', "/offers/{$hash}", null, null, ['raw' => true])->getResource();
+        return $this->http->request('GET', "/offers/{$uuid}", null, null, ['raw' => true])->getResource();
     }
 
     /**
