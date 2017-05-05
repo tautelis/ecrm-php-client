@@ -51,16 +51,16 @@ class Offers
     /**
      * Notify crm about a completed offer order
      *
-     * @param string $hash
+     * @param string $uuid
      * @param array  $data
      *
      * @return resource
      */
-    public function notifyComplete($hash, array $data)
+    public function notifyComplete($uuid, array $data)
     {
         return $this->http->request(
             'POST',
-            "/offers/{$hash}/complete",
+            "/offers/{$uuid}/complete",
             null,
             $data,
             ['raw' => true]
