@@ -37,30 +37,30 @@ class Offers
     }
 
     /**
-     * Load order by id
+     * Load order by uuid
      *
-     * @param string $id
+     * @param string $uuid
      *
      * @return mixed
      */
-    public function load($id)
+    public function load($uuid)
     {
-        return $this->http->request('GET', "/offers/{$id}", null, null, ['raw' => true])->getResource();
+        return $this->http->request('GET', "/offers/{$uuid}", null, null, ['raw' => true])->getResource();
     }
 
     /**
      * Notify crm about a completed offer order
      *
-     * @param string $id
+     * @param string $uuid
      * @param array  $data
      *
      * @return resource
      */
-    public function notifyComplete($id, array $data)
+    public function notifyComplete($uuid, array $data)
     {
         return $this->http->request(
             'POST',
-            "/offers/{$id}/complete",
+            "/offers/{$uuid}/complete",
             null,
             $data,
             ['raw' => true]
