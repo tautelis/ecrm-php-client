@@ -8,7 +8,8 @@ namespace EnhancedCRM;
 class Http
 {
     /** @const string */
-    const API_VERSION_PREFIX = "/v1";
+    const API_VERSION = 'v1';
+    const API_VERSION_HEADER = 'X-Accept-Version';
 
     /**
      * @var Configuration
@@ -114,7 +115,8 @@ class Http
         $defaultHeaders = [
             'User-Agent' => $this->config->userAgent,
             'Authorization' => "Bearer {$this->config->accessToken}",
-            'Accept' => 'application/json'
+            'Accept' => 'application/json',
+            self::API_VERSION_HEADER => self::API_VERSION,
         ];
 
         $userHeaders = ($options && isset($options['headers']) && is_array($options['headers'])) ? $options['headers'] : array();
@@ -137,7 +139,7 @@ class Http
             $url = "{$url}?{$query}";
         }
 
-        $absUrl = $this->config->baseUrl . self::API_VERSION_PREFIX . $url;
+        $absUrl = $this->config->baseUrl . $url;
         $raw = ($options && isset($options['raw'])) ? !!$options['raw'] : false;
 
         $curl = curl_init();
