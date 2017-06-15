@@ -39,28 +39,28 @@ class Offers
     /**
      * Load order by uuid
      *
-     * @param string $hash
+     * @param string $uuid
      *
      * @return mixed
      */
-    public function load($hash)
+    public function load($uuid)
     {
-        return $this->http->request('GET', "/offers/{$hash}", null, null, ['raw' => true])->getResource();
+        return $this->http->request('GET', "/offers/{$uuid}", null, null, ['raw' => true])->getResource();
     }
 
     /**
      * Notify crm about a completed offer order
      *
-     * @param string $hash
+     * @param string $uuid
      * @param array  $data
      *
      * @return resource
      */
-    public function notifyComplete($hash, array $data)
+    public function notifyComplete($uuid, array $data)
     {
         return $this->http->request(
             'POST',
-            "/offers/{$hash}/complete",
+            "/offers/{$uuid}/complete",
             null,
             $data,
             ['raw' => true]
