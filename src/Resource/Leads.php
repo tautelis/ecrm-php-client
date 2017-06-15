@@ -303,12 +303,10 @@ class Leads
     {
         $this->validateArray($this->lead, self::$validStructure);
 
-        $body = [ 'lead' => $this->lead ];
-
         $method = $this->leadId ? 'PATCH' : 'POST';
         $url = $this->leadId ? "/leads/{$this->leadId}" : '/leads';
 
-        return $this->http->request($method, $url, null, $body, ['raw' => true])->getResource();
+        return $this->http->request($method, $url, null, $this->lead, ['raw' => true])->getResource();
     }
 
     /**
